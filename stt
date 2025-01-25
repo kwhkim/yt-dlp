@@ -1,0 +1,10 @@
+#!/bin/bash
+
+./yt-dlp.sh $1 -F
+read -p "Choose the format: " format
+
+./yt-dlp.sh $1 -f $format -o downloaded/"%(title)10s"."%(ext)s"
+#conda init
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate for_whisper
+whisper downloaded/* --output_dir downloaded/
