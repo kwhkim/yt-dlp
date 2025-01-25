@@ -1,3 +1,7 @@
+# youtube video files
+/downloaded/
+
+
 # Config
 *.conf
 cookies
