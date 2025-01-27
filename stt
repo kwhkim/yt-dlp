@@ -1,10 +1,25 @@
 #!/bin/bash
 
-./yt-dlp.sh $1 -F
+# current time
+url=$1
+#snow=$(date -d '30 minutes ago' +'%Y-%m-%d %H:%M:%S')
+snow=$(date -d 'now' +'%Y-%m-%d %H:%M:%S')
+
+./yt-dlp.sh $url -F
 read -p "Choose the format: " format
 
-./yt-dlp.sh $1 -f $format -o downloaded/"%(title)10s"."%(ext)s"
+./yt-dlp.sh $url -f $format -o downloaded/"%(title)10s"."%(ext)s" --no-mtime
 #conda init
 source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate for_whisper
-whisper downloaded/* --output_dir downloaded/
+
+file=$(find downloaded/ -type f -newermt "$snow")
+
+#for file in files; do
+#	#whisper downloaded/* --output_dir downloaded/
+#	echo "- whisper $file"
+#	whisper "$file" --output_dir downloaded/
+#done
+
+echo "- whisper $file"
+whisper "$file" --output_dir downloaded/
