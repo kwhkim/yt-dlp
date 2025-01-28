@@ -1,6 +1,9 @@
 # youtube video files
 /downloaded/
 
+# Recently transcribed text
+/temp.txt
+
 
 # Config
 *.conf

@@ -15,6 +15,11 @@ conda activate for_whisper
 
 file=$(find downloaded/ -type f -newermt "$snow")
 
+base=${file%.*}
+ext=${file##*.}
+
+
+
 #for file in files; do
 #	#whisper downloaded/* --output_dir downloaded/
 #	echo "- whisper $file"
@@ -23,3 +28,13 @@ file=$(find downloaded/ -type f -newermt "$snow")
 
 echo "- whisper $file"
 whisper "$file" --output_dir downloaded/
+
+#base=${file%.*}
+#ext=${file##*.}
+#echo $base  # 이름에 따옴표, 띄어쓰기 등이 들어 있어서 문제가 됨
+#echo $ext
+#cp "'downloaded/$base.txt'" temp.txt # -> 이렇게 해서 작동 가능한지 확실치 않음
+
+filetxt=$(find downloaded/*.txt -type f -newermt "$snow")
+cp "$filetxt" temp.txt
+cat temp.txt
